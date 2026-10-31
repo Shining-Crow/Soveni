@@ -1,0 +1,103 @@
+generator client {
+  provider   = "prisma-client-js"
+  // Rust-free client: no native query engine binary (avoids Windows file locks)
+  engineType = "client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// Visual grouping used on the homepage "business needs" paths.
+enum ServiceTheme {
+  PRESENCE
+  AUDIENCE
+  JOURNEY
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CLOSED
+  SPAM
+}
+
+model Service {
+  id         String       @id @default(cuid())
+  slug       String       @unique
+  title      String
+  summary    String
+  headline   String
+  intro      String
+  need       String
+  inclusions String[]
+  process    String[]
+  exclusions String[]
+  theme      ServiceTheme
+  icon       String
+  order      Int          @default(0)
+  published  Boolean      @default(true)
+  faqs       Faq[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
+
+/// Case studies are only shown when both clientPermission and published are true.
+model CaseStudy {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  clientName       String
+  summary          String
+  role             String
+  deliverables     String[]
+  outcome          String?
+  imageUrl         String?
+  tags             String[]
+  attribution      String?
+  clientPermission Boolean  @default(false)
+  published        Boolean  @default(false)
+  order            Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Faq {
+  id         String   @id @default(cuid())
+  question   String
+  answer     String
+  order      Int      @default(0)
+  showOnHome Boolean  @default(false)
+  service    Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceId  String?
+
+  @@index([serviceId])
+}
+
+model SiteSetting {
+  key   String @id
+  value String
+}
+
+model Enquiry {
+  id           String        @id @default(cuid())
+  name         String
+  email        String
+  businessName String
+  website      String?
+  services     String[]
+  description  String
+  budget       String?
+  timing       String?
+  phone        String?
+  consent      Boolean
+  ipHash       String
+  userAgent    String?
+  status       EnquiryStatus @default(NEW)
+  createdAt    DateTime      @default(now())
+
+  @@index([ipHash, createdAt])
+}
