@@ -5,7 +5,7 @@ import { CtaBand, PageHero } from "@/components/Sections";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Soveni is a UK digital agency that combines strategy, design, development and marketing with a trusted network of specialists.",
+    "Soveni is a UK digital agency that combines strategy, design, engineering and testing with a trusted network of specialists.",
   alternates: { canonical: "/about" },
 };
 
@@ -53,7 +53,7 @@ export default function AboutPage() {
             for quality.
           </p>
           <p>
-            For specialist services such as video production or advanced paid media, we work with a
+            For specialist skills such as native mobile or machine learning engineering, we work with a
             vetted network of collaborators. Before any project starts we agree the scope, cost,
             deadline and who is responsible for each part, so you always have one point of contact.
           </p>

@@ -6,7 +6,7 @@ import { getServices } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Website design, branding, content, SEO, paid advertising, social media and ecommerce — managed by one team.",
+    "Web development, mobile apps, AI solutions, SaaS, backend and APIs, cloud and DevOps, UI/UX design and QA — delivered by one team.",
   alternates: { canonical: "/services" },
 };
 
@@ -17,8 +17,8 @@ export default async function ServicesPage() {
     <>
       <PageHero
         eyebrow="Services"
-        title="Everything you need to grow online, under one roof."
-        intro="We plan, design and manage the services that help businesses look professional, get found and win more customers."
+        title="End-to-end digital solutions for modern businesses."
+        intro="From strategy to launch and beyond, we help you create digital products, brands and experiences that drive real business results."
       >
         <ButtonLink href="/contact">Start a Project</ButtonLink>
       </PageHero>

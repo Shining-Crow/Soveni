@@ -24,15 +24,13 @@ export default async function HomePage() {
   return (
     <>
       {/* 1. Hero */}
-      <section className="relative overflow-hidden border-b border-line">
-        <HeroArt className="absolute top-1/2 -right-40 aspect-square w-[34rem] -translate-y-1/2 opacity-40 sm:-right-24 sm:opacity-60 md:w-[44rem] lg:-right-16 lg:opacity-100" />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-transparent"
-        />
-        <div className="container-page relative py-20 md:py-32 lg:py-40">
+      <section className="hero-frame">
+        <HeroArt className="hero-art" />
+        <div aria-hidden="true" className="hero-shade" />
+        <div aria-hidden="true" className="hero-shade-bottom" />
+        <div className="container-page relative py-20 md:py-28">
           <p className="eyebrow motion-safe:animate-rise">Strategy / Design / Digital / Growth</p>
-          <h1 className="mt-6 max-w-3xl text-[2.75rem] leading-[1.02] tracking-tight motion-safe:animate-rise sm:text-6xl lg:text-7xl">
+          <h1 className="mt-6 max-w-[40rem] text-[2.75rem] leading-[1.02] tracking-tight motion-safe:animate-rise sm:text-6xl lg:text-7xl">
             A stronger presence.
             <span className="block text-champagne">A clearer direction.</span>
           </h1>
@@ -49,15 +47,35 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 2. Authorised projects (only when approved case studies exist) */}
+      {/* 2. Services */}
+      <section className="border-b border-line">
+        <div className="container-page py-20 md:py-24">
+          <SectionHeading
+            eyebrow="Our services"
+            title="End-to-end digital solutions for modern businesses."
+            intro="From strategy to launch and beyond, we help you create digital products, brands and experiences that drive real business results."
+            action={
+              <ButtonLink href="/services" variant="ghost">
+                View All Services
+              </ButtonLink>
+            }
+          />
+          <div className="mt-12">
+            <ServiceGrid services={services} layout="row" />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Authorised projects (only when approved case studies exist) */}
       {featured.length > 0 && (
         <section className="container-page py-20 md:py-28">
           <SectionHeading
             eyebrow="Featured work"
-            title="Selected projects."
+            title="Real projects. Real results."
+            intro="A selection of projects we have delivered for startups and growing businesses."
             action={
               <ButtonLink href="/work" variant="ghost">
-                View all projects
+                View All Projects
               </ButtonLink>
             }
           />
@@ -71,7 +89,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 3. Business-needs paths */}
+      {/* 4. Business-needs paths */}
       <section className="container-page py-20 md:py-28">
         <SectionHeading
           eyebrow="Where can we help?"
@@ -106,25 +124,6 @@ export default async function HomePage() {
         </ul>
       </section>
 
-      {/* 4. All seven services */}
-      <section className="border-y border-line bg-surface/50">
-        <div className="container-page py-20 md:py-28">
-          <SectionHeading
-            eyebrow="Our services"
-            title="End-to-end digital services for growing businesses."
-            intro="From strategy to launch and beyond, we help you build a brand, reach the right people and turn interest into enquiries."
-            action={
-              <ButtonLink href="/services" variant="ghost">
-                View all services
-              </ButtonLink>
-            }
-          />
-          <div className="mt-12">
-            <ServiceGrid services={services} />
-          </div>
-        </div>
-      </section>
-
       {/* 5. About and collaborator model */}
       <section className="container-page grid gap-12 py-20 md:grid-cols-12 md:py-28">
         <div className="md:col-span-5">
@@ -135,7 +134,7 @@ export default async function HomePage() {
         </div>
         <div className="space-y-5 leading-relaxed text-muted md:col-span-6 md:col-start-7">
           <p>
-            Soveni brings together strategy, design, development and marketing under one roof. We
+            Soveni brings together strategy, design, engineering and testing under one roof. We
             lead every project directly and remain your single point of contact from the first
             conversation to launch and beyond.
           </p>

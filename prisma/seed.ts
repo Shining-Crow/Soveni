@@ -4,6 +4,11 @@ import { createPrismaClient } from "../src/lib/prisma";
 const prisma = createPrismaClient();
 
 async function main() {
+  // Remove services that are no longer offered (their FAQs cascade).
+  await prisma.service.deleteMany({
+    where: { slug: { notIn: services.map((s) => s.slug) } },
+  });
+
   for (const { faqs, ...service } of services) {
     const saved = await prisma.service.upsert({
       where: { slug: service.slug },

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/Button";
 import { Icon } from "@/components/Icon";
-import { CtaBand, FaqList, PageHero } from "@/components/Sections";
+import { CtaBand, FaqList, PageHero, ServiceGrid } from "@/components/Sections";
 import { getService, getServices } from "@/lib/content";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -28,7 +27,7 @@ export default async function ServicePage({ params }: Props) {
   const [service, services] = await Promise.all([getService(slug), getServices()]);
   if (!service) notFound();
 
-  const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const others = services.filter((s) => s.slug !== service.slug).slice(0, 4);
 
   return (
     <>
@@ -92,22 +91,12 @@ export default async function ServicePage({ params }: Props) {
 
       <section className="container-page pb-4">
         <h2 className="eyebrow">Related services</h2>
-        <ul className="mt-5 grid gap-3 md:grid-cols-3">
-          {others.map((s) => (
-            <li key={s.slug}>
-              <Link
-                href={`/services/${s.slug}`}
-                className="card flex min-h-16 items-center justify-between gap-4 px-5 py-4 hover:border-champagne/50"
-              >
-                {s.title}
-                <Icon name="arrow" className="size-4 shrink-0 text-champagne" />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-5">
+          <ServiceGrid services={others} />
+        </div>
       </section>
 
-      <CtaBand title={`Talk to us about ${service.title.toLowerCase()}.`} />
+      <CtaBand title={`Talk to us about ${service.title}.`} />
     </>
   );
 }
