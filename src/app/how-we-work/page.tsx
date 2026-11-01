@@ -14,7 +14,7 @@ const detail: Record<string, string[]> = {
     "A written proposal with scope, cost and timeline",
   ],
   Shape: [
-    "Sitemap, content plan or campaign structure",
+    "Sitemap, user flows and technical architecture",
     "Visual direction for desktop and mobile",
     "Your approval before production begins",
   ],

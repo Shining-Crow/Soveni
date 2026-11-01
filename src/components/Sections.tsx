@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CaseStudyContent, FaqContent, ServiceContent } from "@/content/defaults";
 import { ButtonLink } from "./Button";
+import { HeroArt } from "./HeroArt";
 import { Icon } from "./Icon";
 
 export function SectionHeading({
@@ -44,12 +45,11 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-line">
-      <div
-        aria-hidden="true"
-        className="absolute -top-40 right-[-10%] size-[36rem] rounded-full bg-champagne/10 blur-3xl"
-      />
-      <div className="container-page relative py-16 md:py-28">
+    <section className="hero-frame">
+      <HeroArt className="hero-art" />
+      <div aria-hidden="true" className="hero-shade" />
+      <div aria-hidden="true" className="hero-shade-bottom" />
+      <div className="container-page relative py-20 md:py-28">
         <p className="eyebrow motion-safe:animate-rise">{eyebrow}</p>
         <h1 className="mt-5 max-w-4xl text-4xl leading-[1.05] tracking-tight text-balance motion-safe:animate-rise md:text-6xl">
           {title}
@@ -69,25 +69,33 @@ export function ServiceCard({ service }: { service: ServiceContent }) {
   return (
     <Link
       href={`/services/${service.slug}`}
-      className="card group flex h-full flex-col gap-4 p-6 transition-colors hover:border-champagne/50"
+      className="card group flex h-full flex-col p-4 transition-colors hover:border-champagne/50 hover:bg-white/[0.04] md:p-5"
     >
-      <span className="inline-flex size-11 items-center justify-center rounded-xl border border-line text-champagne">
-        <Icon name={service.icon} className="size-6" />
-      </span>
-      <h3 className="text-lg font-semibold leading-snug">{service.title}</h3>
-      <p className="text-sm leading-relaxed text-muted">{service.summary}</p>
-      <span className="mt-auto inline-flex items-center gap-2 pt-2 text-sm text-champagne">
-        Learn more
+      <Icon name={service.icon} className="size-6 text-champagne" />
+      <h3 className="mt-4 text-[0.95rem] leading-snug font-semibold">{service.title}</h3>
+      <p className="mt-2 text-xs leading-relaxed text-muted">{service.summary}</p>
+      <span className="mt-auto pt-5 text-champagne">
         <Icon name="arrow" className="size-4 transition-transform group-hover:translate-x-1" />
-        <span className="sr-only">about {service.title}</span>
+        <span className="sr-only">About {service.title}</span>
       </span>
     </Link>
   );
 }
 
-export function ServiceGrid({ services }: { services: ServiceContent[] }) {
+/** `row` lays every service out in a single line on wide screens, as on the homepage. */
+export function ServiceGrid({
+  services,
+  layout = "grid",
+}: {
+  services: ServiceContent[];
+  layout?: "row" | "grid";
+}) {
+  const cols =
+    layout === "row"
+      ? "grid-cols-2 sm:grid-cols-4 xl:grid-cols-8"
+      : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
   return (
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ul className={`grid gap-2.5 md:gap-3 ${cols}`}>
       {services.map((s) => (
         <li key={s.slug}>
           <ServiceCard service={s} />
@@ -196,9 +204,12 @@ export function CtaBand({
   return (
     <section className="container-page py-20 md:py-28">
       <div className="card relative overflow-hidden px-6 py-14 md:px-14 md:py-20">
+        <HeroArt
+          className="absolute inset-y-0 right-0 aspect-[1060/1176] h-full opacity-40 md:opacity-60"
+        />
         <div
           aria-hidden="true"
-          className="absolute -right-24 -bottom-32 size-96 rounded-full bg-champagne/15 blur-3xl"
+          className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/70 to-transparent"
         />
         <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>

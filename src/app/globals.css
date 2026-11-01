@@ -70,6 +70,20 @@
     color: var(--color-muted);
   }
 
+  /* Shared by the homepage hero and every page hero, so they match in height and imagery */
+  .hero-frame {
+    @apply relative flex items-center overflow-hidden border-b border-line md:min-h-[40rem] lg:min-h-[43rem];
+  }
+  .hero-art {
+    @apply absolute inset-y-0 right-0 aspect-[1060/1176] h-full opacity-45 sm:opacity-70 lg:opacity-100;
+  }
+  .hero-shade {
+    @apply absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent lg:via-35% lg:via-ink/60;
+  }
+  .hero-shade-bottom {
+    @apply absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink to-transparent;
+  }
+
   .card {
     border: 1px solid var(--color-line);
     background: linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0.01));
