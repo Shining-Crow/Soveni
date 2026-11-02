@@ -294,7 +294,8 @@ export function ServiceTile({ service, tabIndex }: { service: ServiceContent; ta
  * Single row of service tiles that scrolls continuously. The list is rendered
  * twice so the loop is seamless. The copy stays clickable (it fills the view
  * for half of every loop) but is hidden from assistive tech and skipped by the
- * Tab key. Pauses on hover/focus; with reduced motion it becomes a plain
+ * Tab key. Pauses on hover and keyboard focus (not mouse focus, which would
+ * leave it stuck after a press or drag on a tile); with reduced motion it becomes a plain
  * horizontally scrollable row.
  */
 export function ServiceMarquee({ services }: { services: ServiceContent[] }) {
@@ -312,7 +313,7 @@ export function ServiceMarquee({ services }: { services: ServiceContent[] }) {
   );
   return (
     <div className="group/marquee mt-12 overflow-hidden pt-2 pb-20 [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)] motion-reduce:overflow-x-auto md:pb-24">
-      <div className="flex w-max motion-safe:animate-marquee group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused]">
+      <div className="flex w-max motion-safe:animate-marquee group-hover/marquee:[animation-play-state:paused] has-[:focus-visible]:[animation-play-state:paused]">
         {row(false)}
         {row(true)}
       </div>
