@@ -1,4 +1,7 @@
-import { GlowWave, LaptopPhoneArt, RibbonArt } from "@/components/Artwork";
+import Image from "next/image";
+import dashboardLaptop from "../../public/images/dashboard-laptop.png";
+import office from "../../public/images/office.png";
+import { GlowWave } from "@/components/Artwork";
 import { ButtonLink } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import {
@@ -7,7 +10,10 @@ import {
   FaqList,
   ProcessSteps,
   SectionHeading,
-  ServiceTile,
+  ServiceMarquee,
+  backdropHeightClass,
+  backdropTextClass,
+  HeroBackdrop,
 } from "@/components/Sections";
 import { themes, type ServiceTheme } from "@/content/defaults";
 import { getCaseStudies, getHomeFaqs, getServices } from "@/lib/content";
@@ -33,24 +39,28 @@ export default async function HomePage() {
       <section className="hero-frame border-b-0">
         <div aria-hidden="true" className="hero-grid" />
         <GlowWave className="absolute top-40 right-0 -z-10 h-[26rem] w-full opacity-60" />
-        <div className="container-page relative grid items-center gap-14 pt-14 pb-12 md:pt-20 lg:grid-cols-12 lg:pb-16">
-          <div className="lg:col-span-6">
-            <p className="eyebrow motion-safe:animate-rise">Digital growth agency</p>
-            <h1 className="mt-5 text-[2.75rem] leading-[1.03] text-balance motion-safe:animate-rise sm:text-6xl lg:text-[4.1rem]">
-              A stronger presence. A clearer <span className="text-gradient">direction.</span>
-            </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted motion-safe:animate-rise">
-              We help ambitious brands grow through strategic thinking, creative design and digital
-              solutions that work.
-            </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact">Start a Project</ButtonLink>
-              <ButtonLink href="/services" variant="secondary" arrow={false}>
-                Explore Our Services
-              </ButtonLink>
+        <div className="relative">
+          <HeroBackdrop image={dashboardLaptop} position="65% center" />
+          <div
+            className={`container-page relative flex items-center pt-14 pb-12 md:pt-20 lg:pb-16 ${backdropHeightClass}`}
+          >
+            <div className={backdropTextClass}>
+              <p className="eyebrow motion-safe:animate-rise">Digital growth agency</p>
+              <h1 className="mt-5 text-[2.75rem] leading-[1.03] text-balance motion-safe:animate-rise sm:text-6xl lg:text-[4.1rem]">
+                A stronger presence. A clearer <span className="text-gradient">direction.</span>
+              </h1>
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted motion-safe:animate-rise">
+                We help ambitious brands grow through strategic thinking, creative design and digital
+                solutions that work.
+              </p>
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                <ButtonLink href="/contact">Start a Project</ButtonLink>
+                <ButtonLink href="/services" variant="secondary" arrow={false}>
+                  Explore Our Services
+                </ButtonLink>
+              </div>
             </div>
           </div>
-          <LaptopPhoneArt className="motion-safe:animate-rise lg:col-span-6" />
         </div>
 
         <div className="container-page relative pb-20 md:pb-24">
@@ -75,32 +85,32 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 2. Services on a light band */}
-      <section className="relative bg-paper text-paper-ink">
-        <div className="container-page py-20 md:py-24">
-          <SectionHeading
-            tone="light"
-            eyebrow="Our services"
-            title={
-              <>
+      {/* 2. Services */}
+      <section className="relative isolate overflow-hidden border-y border-line bg-[radial-gradient(50rem_24rem_at_75%_0%,rgb(10_92_255/0.18),transparent_70%)]">
+        <GlowWave className="absolute right-0 bottom-0 -z-10 h-64 w-full opacity-80 md:h-80" />
+        <div className="container-page pt-20 md:pt-24">
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="eyebrow flex items-center gap-3 !text-fg">
+                Our services
+                <span aria-hidden="true" className="h-px w-12 bg-accent" />
+              </p>
+              <h2 className="mt-5 text-4xl leading-[1.05] md:text-6xl">
                 Everything you need <br className="hidden sm:block" />
-                to grow online.
-              </>
-            }
-            action={
-              <ButtonLink href="/services" variant="ghost" className="!text-accent hover:!text-paper-ink">
-                View All Services
-              </ButtonLink>
-            }
-          />
-          <ul className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
-            {services.map((s) => (
-              <li key={s.slug}>
-                <ServiceTile service={s} />
-              </li>
-            ))}
-          </ul>
+                to grow <span className="text-gradient pr-1 italic">online</span>
+                <span className="text-accent">.</span>
+              </h2>
+            </div>
+            <ButtonLink
+              href="/services"
+              variant="secondary"
+              className="self-start !rounded-full border-accent/60 shadow-[0_0_24px_-6px_rgb(31_139_255/0.7)] md:self-auto"
+            >
+              View All Services
+            </ButtonLink>
+          </div>
         </div>
+        <ServiceMarquee services={services} />
       </section>
 
       {/* 3. Authorised projects (only when approved case studies exist) */}
@@ -133,16 +143,22 @@ export default async function HomePage() {
       {/* 4. About */}
       <section className="relative overflow-hidden">
         <div className="container-page grid items-center gap-12 py-20 md:py-28 lg:grid-cols-12">
-          <div className="relative lg:col-span-5">
-            <div className="card relative aspect-[5/4] overflow-hidden">
-              <RibbonArt className="absolute inset-0 h-full w-full" />
-              <div className="absolute inset-x-6 bottom-6 rounded-xl border border-white/10 bg-ink/60 p-5 backdrop-blur-md">
-                <p className="text-sm text-muted">One partner. The right specialists.</p>
-                <p className="mt-1 text-lg font-semibold">Strategy, design and technology — together.</p>
-              </div>
+          <div className="relative lg:col-span-7">
+            <div
+              aria-hidden="true"
+              className="absolute inset-[8%] -z-10 rounded-full bg-accent/25 blur-3xl"
+            />
+            <div className="card overflow-hidden shadow-[0_30px_80px_-30px_rgb(31_139_255/0.6)]">
+              <Image
+                src={office}
+                alt="Modern meeting room with an illuminated Soveni sign"
+                placeholder="blur"
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="h-auto w-full"
+              />
             </div>
           </div>
-          <div className="lg:col-span-6 lg:col-start-7">
+          <div className="lg:col-span-5 lg:col-start-8">
             <p className="eyebrow">About Soveni</p>
             <h2 className="mt-4 text-3xl leading-[1.1] md:text-5xl">
               A collaborative partner in your <span className="text-gradient">growth.</span>

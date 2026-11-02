@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { RibbonArt } from "@/components/Artwork";
+import Image from "next/image";
+import layers from "../../../public/images/layers.png";
+import office from "../../../public/images/office.png";
 import { ButtonLink } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { CtaBand, PageHero } from "@/components/Sections";
@@ -48,12 +50,8 @@ export default function AboutPage() {
           </>
         }
         intro="We combine strategy, creativity and technology to create meaningful digital experiences that help businesses grow."
-        art={
-          <div className="relative aspect-[6/5]">
-            <RibbonArt className="absolute inset-0 h-full w-full" />
-          </div>
-        }
-        wave={false}
+        background={office}
+        backgroundPosition="72% center"
       >
         <ButtonLink href="/contact">Start a Project</ButtonLink>
       </PageHero>
@@ -75,28 +73,20 @@ export default function AboutPage() {
 
       <section className="container-page grid items-center gap-12 py-20 md:py-28 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <div className="card relative aspect-[4/3] overflow-hidden bg-[radial-gradient(ellipse_at_30%_40%,#0f3a8a,#050b18_70%)]">
-            <svg viewBox="0 0 400 300" aria-hidden="true" className="absolute inset-0 h-full w-full">
-              <defs>
-                <linearGradient id="ap-s" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#4cc4ff" />
-                  <stop offset="1" stopColor="#0a5cff" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              {Array.from({ length: 22 }, (_, i) => (
-                <ellipse
-                  key={i}
-                  cx={170 + i * 3}
-                  cy={150 - i}
-                  rx={60 + i * 7}
-                  ry={30 + i * 4}
-                  transform={`rotate(${-30 + i * 4} 200 150)`}
-                  fill="none"
-                  stroke="url(#ap-s)"
-                  strokeOpacity={0.15 + (i % 4) * 0.12}
-                />
-              ))}
-            </svg>
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute inset-[8%] -z-10 rounded-full bg-accent/25 blur-3xl"
+            />
+            <div className="card overflow-hidden shadow-[0_30px_80px_-30px_rgb(31_139_255/0.6)]">
+              <Image
+                src={layers}
+                alt=""
+                placeholder="blur"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
           </div>
         </div>
         <div className="lg:col-span-5 lg:col-start-8">

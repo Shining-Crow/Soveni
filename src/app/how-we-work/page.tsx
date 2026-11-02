@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import codeLaptop from "../../../public/images/code-laptop.png";
 import { Icon } from "@/components/Icon";
 import { CtaBand, PageHero, ProcessSteps, processSteps } from "@/components/Sections";
 
@@ -43,6 +44,8 @@ export default function HowWeWorkPage() {
           </>
         }
         intro="A proven process that turns your goals into real results, with clarity, collaboration and continuous improvement."
+        background={codeLaptop}
+        backgroundPosition="60% center"
         below={<ProcessSteps />}
       />
 

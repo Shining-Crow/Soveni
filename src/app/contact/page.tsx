@@ -50,8 +50,8 @@ export default async function ContactPage({ searchParams }: Props) {
     <section className="hero-frame">
       <div aria-hidden="true" className="hero-grid" />
       <GlowWave className="absolute right-0 bottom-0 -z-10 h-72 w-full md:h-96" />
-      <div className="container-page relative grid gap-14 py-16 md:py-24 lg:grid-cols-12">
-        <div className="lg:col-span-5">
+      <div className="container-page relative grid gap-14 py-16 md:py-24 lg:grid-cols-12 lg:gap-10 xl:gap-14">
+        <div className="lg:col-span-5 xl:col-span-4">
           <p className="eyebrow motion-safe:animate-rise">Get in touch</p>
           <h1 className="mt-5 text-[2.5rem] leading-[1.05] text-balance motion-safe:animate-rise sm:text-5xl lg:text-6xl">
             Let&apos;s build something <span className="text-gradient">great.</span>
@@ -99,8 +99,8 @@ export default async function ContactPage({ searchParams }: Props) {
           <SocialLinks settings={settings} className="mt-10" />
         </div>
 
-        <div className="lg:col-span-7 lg:col-start-6 xl:col-span-6 xl:col-start-7">
-          <div className="rounded-3xl border border-line-strong bg-[#08101e]/85 p-6 shadow-[0_40px_100px_-30px_rgb(10_92_255/0.55)] backdrop-blur-xl md:p-10">
+        <div className="lg:col-span-7 xl:col-span-8">
+          <div className="rounded-3xl border border-line-strong bg-[#08101e]/85 p-6 lg:p-12 shadow-[0_40px_100px_-30px_rgb(10_92_255/0.55)] backdrop-blur-xl md:p-10">
             <EnquiryForm
               services={services.map(({ slug, title }) => ({ slug, title }))}
               preselected={service}
