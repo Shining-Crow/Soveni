@@ -1,30 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0a0a0b;
-  --color-surface: #121214;
-  --color-raised: #18181b;
-  --color-line: rgb(255 255 255 / 0.09);
-  --color-line-strong: rgb(255 255 255 / 0.18);
-  --color-fg: #f5f4f1;
-  --color-muted: #a3a3a8;
-  --color-subtle: #75757c;
-  --color-champagne: #f3d29b;
-  --color-champagne-strong: #e8bd72;
-  --color-champagne-ink: #1a1408;
+  --color-ink: #03060d;
+  --color-surface: #070d19;
+  --color-raised: #0b1424;
+  --color-line: rgb(120 160 255 / 0.1);
+  --color-line-strong: rgb(120 160 255 / 0.22);
+  --color-fg: #f4f7fc;
+  --color-muted: #a1acc0;
+  --color-subtle: #6b7891;
+  --color-accent: #1f8bff;
+  --color-accent-strong: #3a9bff;
+  --color-accent-ink: #ffffff;
+  --color-sky: #38b6ff;
+  --color-glow: #0a5cff;
+  --color-paper: #eef3fa;
+  --color-paper-ink: #0b1220;
 
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 6s ease-in-out infinite;
 
   @keyframes rise {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: none; }
   }
-  @keyframes drift {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    50% { transform: rotate(4deg) translateY(-10px); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 1; }
   }
 }
 
@@ -40,12 +49,16 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
   }
+  h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
   ::selection {
-    background: var(--color-champagne);
-    color: var(--color-champagne-ink);
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
   }
   :focus-visible {
-    outline: 2px solid var(--color-champagne);
+    outline: 2px solid var(--color-sky);
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -54,7 +67,7 @@
 @layer components {
   .container-page {
     width: 100%;
-    max-width: 80rem;
+    max-width: 78rem;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
@@ -65,29 +78,59 @@
   .eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-sky);
   }
 
-  /* Shared by the homepage hero and every page hero, so they match in height and imagery */
+  /* Blue highlight used for the last words of headlines */
+  .text-gradient {
+    background: linear-gradient(100deg, #1f8bff 10%, #4cc4ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Shared hero shell: dark field with a soft blue light source behind the artwork */
   .hero-frame {
-    @apply relative flex items-center overflow-hidden border-b border-line md:min-h-[40rem] lg:min-h-[43rem];
+    @apply relative isolate overflow-hidden border-b border-line;
+    background:
+      radial-gradient(60rem 36rem at 85% 30%, rgb(10 92 255 / 0.22), transparent 60%),
+      radial-gradient(40rem 30rem at 0% 0%, rgb(31 139 255 / 0.08), transparent 70%),
+      var(--color-ink);
   }
-  .hero-art {
-    @apply absolute inset-y-0 right-0 aspect-[1060/1176] h-full opacity-45 sm:opacity-70 lg:opacity-100;
-  }
-  .hero-shade {
-    @apply absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent lg:via-35% lg:via-ink/60;
-  }
-  .hero-shade-bottom {
-    @apply absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink to-transparent;
+  .hero-grid {
+    @apply absolute inset-0 -z-10;
+    background-image:
+      linear-gradient(rgb(120 160 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(120 160 255 / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 20%, transparent 75%);
   }
 
   .card {
     border: 1px solid var(--color-line);
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.035), rgb(255 255 255 / 0.01));
+    background: linear-gradient(180deg, rgb(20 40 80 / 0.35), rgb(10 20 40 / 0.25));
     border-radius: 1rem;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.03);
+  }
+  .card-hover {
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s, background 0.25s;
+  }
+  .card-hover:hover {
+    border-color: rgb(56 140 255 / 0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px -20px rgb(10 92 255 / 0.45);
+  }
+
+  /* Rounded tile holding a glowing line icon */
+  .icon-tile {
+    @apply inline-flex items-center justify-center rounded-xl border border-accent/25 text-sky;
+    background: linear-gradient(180deg, rgb(31 139 255 / 0.18), rgb(31 139 255 / 0.04));
+    box-shadow: 0 0 24px -6px rgb(31 139 255 / 0.55);
+  }
+  .icon-glow {
+    filter: drop-shadow(0 0 8px rgb(56 182 255 / 0.65));
   }
 
   .prose-legal h2 { font-size: 1.25rem; font-weight: 600; margin: 2.25rem 0 0.75rem; }

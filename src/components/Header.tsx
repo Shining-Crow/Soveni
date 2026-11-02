@@ -15,9 +15,17 @@ function isActive(pathname: string, href: string) {
 export function Header({ nav }: { nav: NavItem[] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuId = useId();
 
   useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -31,12 +39,18 @@ export function Header({ nav }: { nav: NavItem[] }) {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-ink/80 backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+        scrolled || open
+          ? "border-line bg-ink/80 backdrop-blur-xl"
+          : "border-transparent bg-ink/40 backdrop-blur-sm"
+      }`}
+    >
       <div className="container-page flex h-16 items-center justify-between gap-6 md:h-20">
         <Logo />
 
         <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-8 text-sm">
+          <ul className="flex items-center gap-1 text-sm">
             {nav.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -44,9 +58,9 @@ export function Header({ nav }: { nav: NavItem[] }) {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative py-2 transition-colors hover:text-fg ${
+                    className={`relative rounded-lg px-3.5 py-2 font-medium transition-colors hover:text-fg ${
                       active
-                        ? "text-fg after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-champagne"
+                        ? "text-fg after:absolute after:inset-x-3.5 after:-bottom-1 after:h-0.5 after:rounded-full after:bg-accent after:shadow-[0_0_10px_rgb(31_139_255/0.9)]"
                         : "text-muted"
                     }`}
                   >
@@ -59,18 +73,18 @@ export function Header({ nav }: { nav: NavItem[] }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ButtonLink href="/contact" className="hidden !px-5 !py-2.5 sm:inline-flex">
+          <ButtonLink href="/contact" className="hidden !min-h-10 !px-5 !py-2.5 sm:inline-flex">
             Start a Project
           </ButtonLink>
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-full text-fg lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-xl border border-line text-fg lg:hidden"
             aria-expanded={open}
             aria-controls={menuId}
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
-            <Icon name={open ? "close" : "menu"} className="size-6" />
+            <Icon name={open ? "close" : "menu"} className="size-5" />
           </button>
         </div>
       </div>
@@ -88,8 +102,8 @@ export function Header({ nav }: { nav: NavItem[] }) {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-14 items-center justify-between border-b border-line text-2xl ${
-                  active ? "text-champagne" : "text-fg"
+                className={`flex min-h-14 items-center justify-between border-b border-line text-2xl font-semibold ${
+                  active ? "text-sky" : "text-fg"
                 }`}
               >
                 {item.label}

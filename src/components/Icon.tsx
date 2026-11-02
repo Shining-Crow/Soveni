@@ -84,6 +84,97 @@ const paths: Record<string, React.ReactNode> = {
       <path d="m20.5 20.5-4.5-4.5M8 11l2 2 4-4" />
     </>
   ),
+  monitor: (
+    <>
+      <rect x="2.5" y="4" width="19" height="12.5" rx="2" />
+      <path d="M8.5 20.5h7M12 16.5v4M2.5 13h19" />
+    </>
+  ),
+  layers: (
+    <>
+      <path d="m12 3 9 4.5-9 4.5-9-4.5Z" />
+      <path d="m3 12 9 4.5 9-4.5M3 16.5 12 21l9-4.5" />
+    </>
+  ),
+  play: (
+    <>
+      <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+      <path d="m10 9.2 5 2.8-5 2.8Z" />
+    </>
+  ),
+  share: (
+    <>
+      <circle cx="6" cy="12" r="2.6" />
+      <circle cx="17.5" cy="5.5" r="2.6" />
+      <circle cx="17.5" cy="18.5" r="2.6" />
+      <path d="m8.3 10.7 6.9-3.9M8.3 13.3l6.9 3.9" />
+    </>
+  ),
+  target: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.5" />
+      <path d="m13 11 7-7M17 4h3v3" />
+    </>
+  ),
+  bulb: (
+    <>
+      <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" />
+    </>
+  ),
+  brackets: <path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4.5l-3 15" />,
+  chart: <path d="M4 20h16M6.5 16v-4M11 16V9M15.5 16v-6M20 16V5" />,
+  trend: <path d="m3 17 6-6 4 4 8-8M15 7h6v6" />,
+  bolt: <path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12Z" />,
+  devices: (
+    <>
+      <rect x="2.5" y="4" width="14" height="10" rx="1.6" />
+      <path d="M6 18h7" />
+      <rect x="15.5" y="9" width="6" height="11.5" rx="1.4" />
+    </>
+  ),
+  gauge: (
+    <>
+      <path d="M3.5 16a8.5 8.5 0 1 1 17 0" />
+      <path d="m12 16 4.5-5M3.5 16h2M18.5 16h2M12 7.5V9.5" />
+    </>
+  ),
+  mail: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
+    </>
+  ),
+  phone: (
+    <path d="M5 3.5h3.5l1.8 4.5-2.3 1.5a11 11 0 0 0 6.5 6.5l1.5-2.3 4.5 1.8V19a1.5 1.5 0 0 1-1.5 1.5A16.5 16.5 0 0 1 3.5 5 1.5 1.5 0 0 1 5 3.5Z" />
+  ),
+  pin: (
+    <>
+      <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" />
+    </>
+  ),
+  x: <path d="M4 4l16 16M20 4 4 20" />,
+  instagram: (
+    <>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <path d="M17 7h.01" />
+    </>
+  ),
+  linkedin: (
+    <>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M8 10.5V16M8 8h.01M11.5 16v-5.5M11.5 13a2.5 2.5 0 0 1 5 0v3" />
+    </>
+  ),
   plus: <path d="M12 5v14M5 12h14" />,
   check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,

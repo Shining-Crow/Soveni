@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CaseStudyCard, CtaBand, PageHero } from "@/components/Sections";
+import { ShowcaseArt } from "@/components/Artwork";
+import { CtaBand, PageHero } from "@/components/Sections";
 import { getCaseStudies } from "@/lib/content";
+import { WorkGrid } from "./WorkGrid";
 
 export const metadata: Metadata = {
   title: "Our Work",
@@ -16,15 +18,18 @@ export default async function WorkPage() {
 
   return (
     <>
-      <PageHero eyebrow="Our Work" title="Selected projects." />
+      <PageHero
+        eyebrow="Our work"
+        title={
+          <>
+            Selected projects and <span className="text-gradient">success stories.</span>
+          </>
+        }
+        intro="A collection of our recent work, showing how we help brands build, grow and perform online."
+        art={<ShowcaseArt />}
+      />
       <section className="container-page py-16 md:py-24">
-        <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {studies.map((study) => (
-            <li key={study.slug}>
-              <CaseStudyCard study={study} />
-            </li>
-          ))}
-        </ul>
+        <WorkGrid studies={studies} />
       </section>
       <CtaBand />
     </>
