@@ -8,7 +8,7 @@ Public marketing site for Soveni, built with **Next.js (App Router) + Prisma + S
 npm install
 cp .env.example .env      # fill in your Supabase connection strings
 npm run db:push           # create tables in Supabase
-npm run db:seed           # load the eight services, FAQs and site settings
+npm run db:seed           # load the seven services, FAQs and site settings
 npm run dev
 ```
 
@@ -36,10 +36,10 @@ Use Supabase's Table Editor or `npm run db:studio` to edit content:
 
 | Table | Purpose |
 | --- | --- |
-| `Service` | The eight service pages (copy, inclusions, process, exclusions). |
+| `Service` | The seven service pages (copy, inclusions, process, exclusions). |
 | `Faq` | Service FAQs (`serviceId` set) and homepage FAQs (`showOnHome = true`). |
 | `CaseStudy` | Shown **only** when both `clientPermission` and `published` are true. "Our Work" is hidden from the navigation and returns 404 until then. |
-| `SiteSetting` | `contactEmail`, `contactPhone`, `companyName` and `companyLocation`. Leave a value empty to hide it. |
+| `SiteSetting` | `contactEmail`, `contactPhone`, `companyName`, `companyLocation` and social profile URLs (`socialX`, `socialInstagram`, `socialLinkedin`). Leave a value empty to hide it. |
 | `Enquiry` | Form submissions. |
 
 Pages revalidate every 5 minutes, so content edits appear without a redeploy.
@@ -53,8 +53,8 @@ Pages revalidate every 5 minutes, so content edits appear without a redeploy.
 ## Before launch (Plan §14)
 
 - Supply the approved logo. `src/components/Logo.tsx` is a text placeholder.
-- Confirm the accent colour. The champagne tokens are in `src/app/globals.css`.
+- Confirm the accent colour. The blue tokens (`accent`, `sky`, `glow`) are in `src/app/globals.css`.
 - Verify the contact details and add them to `SiteSetting`.
 - Have the legal pages reviewed and remove the draft banners.
-- Replace `public/images/hero-sculpture.jpg` with the full-resolution render. The current file is cut from the design mockup.
+- Device mockups and light effects are drawn in code (`src/components/Artwork.tsx`). Swap in real project screenshots once approved.
 - Add case studies only with client permission.

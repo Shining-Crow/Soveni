@@ -56,7 +56,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <ul className="mt-5 divide-y divide-line border-y border-line">
             {study.deliverables.map((d) => (
               <li key={d} className="flex items-start gap-4 py-4">
-                <Icon name="check" className="mt-0.5 size-5 shrink-0 text-champagne" />
+                <Icon name="check" className="mt-0.5 size-5 shrink-0 text-sky" />
                 {d}
               </li>
             ))}

@@ -5,10 +5,10 @@ export function Logo() {
   return (
     <Link
       href="/"
-      className="text-lg font-medium tracking-[0.42em] text-fg md:text-xl"
+      className="text-xl font-semibold tracking-[0.14em] text-fg md:text-2xl"
       aria-label="Soveni home"
     >
-      SOVENI
+      <span className="text-gradient">S</span>OVENI
     </Link>
   );
 }

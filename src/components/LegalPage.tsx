@@ -13,7 +13,7 @@ export function LegalPage({
     <>
       <PageHero eyebrow="Legal" title={title} intro={`Last updated ${updated}`} />
       <article className="container-page prose-legal max-w-3xl py-16 md:py-20">
-        <p className="rounded-xl border border-champagne/30 bg-champagne/5 px-4 py-3 text-sm !text-champagne">
+        <p className="rounded-xl border border-accent/30 bg-accent/5 px-4 py-3 text-sm !text-sky">
           Draft — this text must be reviewed and approved before launch.
         </p>
         {children}

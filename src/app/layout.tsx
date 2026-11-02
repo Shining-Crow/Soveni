@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { getCaseStudies, getServices, getSettings } from "@/lib/content";
 import { primaryNav, siteUrl } from "@/lib/nav";
 import "./globals.css";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export const viewport: Viewport = { themeColor: "#0a0a0b" };
+export const viewport: Viewport = { themeColor: "#03060d" };
 
 export const revalidate = 300;
 
@@ -30,11 +30,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const nav = primaryNav(caseStudies.length > 0);
 
   return (
-    <html lang="en-GB" className={manrope.variable}>
+    <html lang="en-GB" className={inter.variable}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"
-          className="sr-only z-[60] rounded-full bg-champagne px-4 py-2 text-champagne-ink focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          className="sr-only z-[60] rounded-lg bg-accent px-4 py-2 text-accent-ink focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
         >
           Skip to content
         </a>

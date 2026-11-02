@@ -8,7 +8,7 @@ import { budgetOptions, timingOptions, type EnquiryState } from "@/lib/enquiry";
 import { submitEnquiry } from "./actions";
 
 const inputClass =
-  "mt-2 block min-h-12 w-full rounded-xl border border-line-strong bg-surface px-4 py-3 text-base text-fg placeholder:text-subtle transition-colors focus:border-champagne focus:outline-none aria-[invalid=true]:border-red-400";
+  "mt-2 block min-h-12 w-full rounded-xl border border-line-strong bg-[#050b17] px-4 py-3 text-base text-fg placeholder:text-subtle transition-all focus:border-accent focus:shadow-[0_0_0_4px_rgb(31_139_255/0.15)] focus:outline-none aria-[invalid=true]:border-red-400";
 
 function Field({
   id,
@@ -59,8 +59,8 @@ export function EnquiryForm({
 
   if (state.status === "success") {
     return (
-      <div ref={statusRef} tabIndex={-1} role="status" className="card p-8 md:p-12">
-        <span className="inline-flex size-12 items-center justify-center rounded-full bg-champagne text-champagne-ink">
+      <div ref={statusRef} tabIndex={-1} role="status" className="py-6 md:py-10">
+        <span className="inline-flex size-12 items-center justify-center rounded-full bg-accent text-accent-ink shadow-[0_0_30px_rgb(31_139_255/0.6)]">
           <Icon name="check" className="size-6" />
         </span>
         <h2 className="mt-6 text-3xl tracking-tight">Thank you — we've got it.</h2>
@@ -84,6 +84,10 @@ export function EnquiryForm({
 
   return (
     <form action={action} noValidate className="space-y-6" key={JSON.stringify(values)}>
+      <div>
+        <h2 className="text-2xl md:text-3xl">Send us a message</h2>
+        <p className="mt-2 text-sm text-muted">Fields marked optional can be left blank.</p>
+      </div>
       {state.status === "error" && (
         <div
           ref={statusRef}
@@ -112,18 +116,18 @@ export function EnquiryForm({
 
       <fieldset aria-describedby={errors.services ? "services-error" : undefined}>
         <legend className="text-sm font-medium">What can we help with?</legend>
-        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        <div className="mt-3 flex flex-wrap gap-2">
           {services.map((s) => (
             <label
               key={s.slug}
-              className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-line-strong px-4 py-2 text-sm has-[:checked]:border-champagne has-[:checked]:bg-champagne/10"
+              className="flex min-h-11 cursor-pointer items-center gap-2.5 rounded-full border border-line-strong px-4 py-2 text-sm transition-colors hover:border-accent/50 has-[:checked]:border-accent has-[:checked]:bg-accent/15 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-sky"
             >
               <input
                 type="checkbox"
                 name="services"
                 value={s.title}
                 defaultChecked={selected.includes(s.title) || selected.includes(s.slug)}
-                className="size-4 accent-[var(--color-champagne)]"
+                className="size-4 accent-[var(--color-accent)]"
               />
               {s.title}
             </label>
@@ -136,11 +140,11 @@ export function EnquiryForm({
         )}
       </fieldset>
 
-      <Field id="description" label="Tell us about your project" error={errors.description}>
+      <Field id="description" label="Project details" error={errors.description}>
         <textarea id="description" name="description" rows={6} required defaultValue={v("description")} placeholder="What would you like to achieve, and is there anything we should know?" className={`${inputClass} resize-y`} {...a11y("description")} />
       </Field>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-3">
         <Field id="budget" label="Budget" optional>
           <select id="budget" name="budget" defaultValue={v("budget") ?? ""} className={inputClass}>
             <option value="">Select…</option>
@@ -167,10 +171,10 @@ export function EnquiryForm({
 
       <div>
         <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
-          <input type="checkbox" name="consent" required className="mt-1 size-4 shrink-0 accent-[var(--color-champagne)]" {...a11y("consent")} />
+          <input type="checkbox" name="consent" required className="mt-1 size-4 shrink-0 accent-[var(--color-accent)]" {...a11y("consent")} />
           <span>
             I agree that Soveni may use these details to respond to my enquiry, as described in the{" "}
-            <Link href="/privacy" className="text-fg underline underline-offset-4 hover:text-champagne">
+            <Link href="/privacy" className="text-fg underline underline-offset-4 hover:text-sky">
               privacy notice
             </Link>
             .
@@ -183,8 +187,8 @@ export function EnquiryForm({
         )}
       </div>
 
-      <button type="submit" disabled={pending} className={buttonClass("primary", "w-full disabled:opacity-60 sm:w-auto")}>
-        {pending ? "Sending…" : "Send enquiry"}
+      <button type="submit" disabled={pending} className={buttonClass("primary", "w-full !py-4 disabled:opacity-60 sm:w-auto sm:!px-10")}>
+        {pending ? "Sending…" : "Send Message"}
         <Icon name="arrow" className="size-4" />
       </button>
     </form>

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import type { ServiceContent, SiteSettings } from "@/content/defaults";
 import type { NavItem } from "@/lib/nav";
+import { Icon } from "./Icon";
 import { Logo } from "./Logo";
+import { SocialLinks } from "./Sections";
 
 export function Footer({
   nav,
@@ -15,18 +17,26 @@ export function Footer({
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-surface/40">
-      <div className="container-page grid gap-12 py-16 md:grid-cols-12">
+    <footer className="relative overflow-hidden border-t border-line bg-surface">
+      <div
+        aria-hidden="true"
+        className="absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-glow/10 blur-3xl"
+      />
+      <div className="container-page relative grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-4">
           <Logo />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
-            A digital agency helping ambitious businesses design, build and grow meaningful online
-            experiences.
+            A digital growth agency helping ambitious brands build presence, attract the right
+            audience and grow online.
           </p>
-          <ul className="mt-6 space-y-2 text-sm">
+          <ul className="mt-6 space-y-3 text-sm">
             {settings.contactEmail && (
               <li>
-                <a href={`mailto:${settings.contactEmail}`} className="text-fg hover:text-champagne">
+                <a
+                  href={`mailto:${settings.contactEmail}`}
+                  className="inline-flex items-center gap-2.5 text-fg hover:text-sky"
+                >
+                  <Icon name="mail" className="size-4 text-sky" />
                   {settings.contactEmail}
                 </a>
               </li>
@@ -35,14 +45,21 @@ export function Footer({
               <li>
                 <a
                   href={`tel:${settings.contactPhone.replace(/\s/g, "")}`}
-                  className="text-fg hover:text-champagne"
+                  className="inline-flex items-center gap-2.5 text-fg hover:text-sky"
                 >
+                  <Icon name="phone" className="size-4 text-sky" />
                   {settings.contactPhone}
                 </a>
               </li>
             )}
-            {settings.companyLocation && <li className="text-muted">{settings.companyLocation}</li>}
+            {settings.companyLocation && (
+              <li className="inline-flex items-center gap-2.5 text-muted">
+                <Icon name="pin" className="size-4 text-sky" />
+                {settings.companyLocation}
+              </li>
+            )}
           </ul>
+          <SocialLinks settings={settings} className="mt-6" />
         </div>
 
         <nav aria-label="Services" className="md:col-span-5">
@@ -50,7 +67,7 @@ export function Footer({
           <ul className="mt-5 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
             {services.map((s) => (
               <li key={s.slug}>
-                <Link href={`/services/${s.slug}`} className="text-muted hover:text-fg">
+                <Link href={`/services/${s.slug}`} className="text-muted transition-colors hover:text-fg">
                   {s.title}
                 </Link>
               </li>
@@ -63,7 +80,7 @@ export function Footer({
           <ul className="mt-5 space-y-3 text-sm">
             {nav.slice(1).map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-muted hover:text-fg">
+                <Link href={item.href} className="text-muted transition-colors hover:text-fg">
                   {item.label}
                 </Link>
               </li>
@@ -72,7 +89,7 @@ export function Footer({
         </nav>
       </div>
 
-      <div className="border-t border-line">
+      <div className="relative border-t border-line">
         <div className="container-page flex flex-col gap-4 py-6 text-xs text-subtle sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {settings.companyName}. All rights reserved.
