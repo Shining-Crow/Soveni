@@ -172,34 +172,6 @@ function WebsiteScreen({ uid, title = "Explore Beyond" }: { uid: string; title?:
   );
 }
 
-function PhoneScreen({ uid }: { uid: string }) {
-  return (
-    <svg viewBox="0 0 200 400" className="block h-full w-full" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id={`${uid}-p`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#123d7a" />
-          <stop offset="1" stopColor="#8cb8e6" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="400" fill="#f5f8fd" />
-      <rect x="14" y="36" width="70" height="8" rx="4" fill="#0b1220" />
-      <rect x="14" y="56" width="172" height="130" rx="14" fill={`url(#${uid}-p)`} />
-      <path d="M14 160 L60 112 L92 140 L130 98 L186 150 V186 H14 Z" fill="#0c2142" opacity="0.9" />
-      <rect x="26" y="70" width="80" height="9" rx="4.5" fill="#fff" />
-      <rect x="26" y="85" width="56" height="6" rx="3" fill="#dbe9ff" />
-      {[204, 256, 308].map((y, i) => (
-        <g key={y}>
-          <rect x="14" y={y} width="172" height="42" rx="10" fill="#e6eef9" />
-          <rect x="24" y={y + 9} width="24" height="24" rx="7" fill={i === 0 ? "#1f8bff" : "#9ab3d6"} />
-          <rect x="58" y={y + 12} width="80" height="6" rx="3" fill="#25344d" />
-          <rect x="58" y={y + 24} width="54" height="5" rx="2.5" fill="#8a97ad" />
-        </g>
-      ))}
-      <rect x="14" y="362" width="172" height="26" rx="9" fill="#1f8bff" />
-    </svg>
-  );
-}
-
 /** Soft blue light pooling under a device. */
 function Glow({ className = "" }: { className?: string }) {
   return (
@@ -245,54 +217,6 @@ export function GlowWave({ className = "" }: { className?: string }) {
       <path d="M0 370 C300 350 520 300 760 250 S1080 170 1200 120" fill="none" stroke="url(#wave-a)" strokeWidth="1.5" />
       <path d="M200 400 C480 370 700 330 900 300 S1130 250 1200 240" fill="none" stroke="url(#wave-a)" strokeWidth="1.2" opacity="0.7" />
     </svg>
-  );
-}
-
-/** Homepage: laptop running a dashboard, with a phone in front. */
-export function LaptopPhoneArt({ className = "" }: { className?: string }) {
-  return (
-    <div aria-hidden="true" className={`pointer-events-none relative select-none ${className}`}>
-      <Glow className="inset-x-[5%] top-[20%] bottom-[5%]" />
-      <div className="relative [perspective:1600px]">
-        <div className="relative mx-auto w-[88%] [transform:rotateY(-12deg)_rotateX(4deg)] [transform-style:preserve-3d]">
-          <div className="rounded-t-[14px] border border-white/10 bg-[#0a0f1a] p-[1.6%] shadow-[0_0_80px_-10px_rgb(31_139_255/0.65)]">
-            <div className="aspect-[16/10] overflow-hidden rounded-[6px] ring-1 ring-accent/30">
-              <DashboardScreen uid="lp" />
-            </div>
-          </div>
-          <div className="relative mx-[-6%] h-3 rounded-b-[14px] bg-gradient-to-b from-[#3a4560] to-[#141b2a] shadow-[0_24px_40px_-10px_rgb(0_0_0/0.8)]">
-            <div className="absolute top-0 left-1/2 h-1.5 w-[16%] -translate-x-1/2 rounded-b-md bg-[#0b111c]" />
-          </div>
-        </div>
-        <div className="absolute right-0 bottom-[-6%] w-[24%] motion-safe:animate-float">
-          <div className="rounded-[22px] border border-white/15 bg-[#0a0f1a] p-[5%] shadow-[0_20px_60px_-10px_rgb(31_139_255/0.6)]">
-            <div className="aspect-[9/19] overflow-hidden rounded-[16px]">
-              <PhoneScreen uid="lp-ph" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** Services hub: a tilted desktop monitor. */
-export function MonitorArt({ className = "" }: { className?: string }) {
-  return (
-    <div aria-hidden="true" className={`pointer-events-none relative select-none ${className}`}>
-      <Glow className="inset-x-[8%] top-[15%] bottom-0" />
-      <div className="relative [perspective:1400px]">
-        <div className="mx-auto w-[92%] [transform:rotateY(-18deg)_rotateX(6deg)_rotateZ(-2deg)]">
-          <div className="rounded-[16px] border border-accent/40 bg-[#050a14] p-[2%] shadow-[0_0_0_1px_rgb(31_139_255/0.25),0_0_90px_-8px_rgb(31_139_255/0.75)]">
-            <div className="aspect-[16/10] overflow-hidden rounded-[8px]">
-              <DashboardScreen uid="mn" />
-            </div>
-          </div>
-          <div className="mx-auto h-10 w-[14%] bg-gradient-to-b from-[#1b2436] to-[#0b111c]" />
-          <div className="mx-auto h-2.5 w-[36%] rounded-full bg-[#1b2436] shadow-[0_10px_30px_rgb(31_139_255/0.4)]" />
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -350,39 +274,6 @@ export function LaptopArt({ className = "", title }: { className?: string; title
         </div>
       </div>
     </div>
-  );
-}
-
-/** About page: layered light ribbons, a quieter abstract than the device art. */
-export function RibbonArt({ className = "" }: { className?: string }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 600 460" className={`pointer-events-none select-none ${className}`}>
-      <defs>
-        <radialGradient id="rb-core" cx="0.6" cy="0.45" r="0.6">
-          <stop offset="0" stopColor="#1f8bff" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#03060d" stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id="rb-line" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#4cc4ff" stopOpacity="0" />
-          <stop offset="0.5" stopColor="#4cc4ff" />
-          <stop offset="1" stopColor="#0a5cff" stopOpacity="0.2" />
-        </linearGradient>
-        <filter id="rb-blur">
-          <feGaussianBlur stdDeviation="5" />
-        </filter>
-      </defs>
-      <rect width="600" height="460" fill="url(#rb-core)" />
-      {Array.from({ length: 14 }, (_, i) => {
-        const o = i * 9;
-        const d = `M${-40 + o} ${420 - o * 0.6} C${140 + o} ${120 + o}, ${300 - o} ${520 - o}, ${640 - o * 0.5} ${80 + o * 1.4}`;
-        return (
-          <g key={i} opacity={0.25 + (i % 5) * 0.12}>
-            {i % 4 === 0 && <path d={d} fill="none" stroke="url(#rb-line)" strokeWidth="5" filter="url(#rb-blur)" />}
-            <path d={d} fill="none" stroke="url(#rb-line)" strokeWidth="1.2" />
-          </g>
-        );
-      })}
-    </svg>
   );
 }
 

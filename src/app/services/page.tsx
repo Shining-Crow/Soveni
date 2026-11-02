@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MonitorArt } from "@/components/Artwork";
+import devices from "../../../public/images/devices.png";
 import { ButtonLink } from "@/components/Button";
 import { CtaBand, PageHero, ProcessSteps, SectionHeading, ServiceGrid } from "@/components/Sections";
 import { getServices } from "@/lib/content";
@@ -24,7 +24,8 @@ export default async function ServicesPage() {
           </>
         }
         intro="A complete set of digital, creative and marketing services that work together to build your brand, attract customers and grow your business."
-        art={<MonitorArt />}
+        background={devices}
+        backgroundPosition="65% center"
       >
         <ButtonLink href="/contact">Start a Project</ButtonLink>
         <ButtonLink href="#services" variant="secondary" arrow={false}>
