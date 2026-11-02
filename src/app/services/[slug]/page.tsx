@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import type { StaticImageData } from "next/image";
 import { notFound } from "next/navigation";
+import brandingImage from "../../../../public/images/services/branding-graphic-design.png";
+import contentImage from "../../../../public/images/services/content-creation.png";
+import ecommerceImage from "../../../../public/images/services/ecommerce-marketplace.png";
+import paidAdsImage from "../../../../public/images/services/paid-advertising.png";
+import seoImage from "../../../../public/images/services/seo.png";
+import socialImage from "../../../../public/images/services/social-media-management.png";
+import webImage from "../../../../public/images/services/web-design-development.png";
 import { BrowserStackArt, LaptopArt } from "@/components/Artwork";
 import { ButtonLink } from "@/components/Button";
 import { Icon } from "@/components/Icon";
@@ -21,6 +29,17 @@ const strengths = [
   { icon: "gauge", label: "Fast & Optimised" },
   { icon: "layers", label: "Business-Focused" },
 ];
+
+/** Hero backdrop per service. Services without one fall back to the drawn browser art. */
+const heroImages: Record<string, StaticImageData> = {
+  "web-design-development": webImage,
+  "branding-graphic-design": brandingImage,
+  "content-creation": contentImage,
+  seo: seoImage,
+  "paid-advertising": paidAdsImage,
+  "social-media-management": socialImage,
+  "ecommerce-marketplace": ecommerceImage,
+};
 
 export async function generateStaticParams() {
   const services = await getServices();
@@ -44,6 +63,7 @@ export default async function ServicePage({ params }: Props) {
 
   const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
   const shortTitle = service.title.replace(/\s*\(.*\)$/, "");
+  const heroImage = heroImages[service.slug];
 
   return (
     <>
@@ -59,7 +79,10 @@ export default async function ServicePage({ params }: Props) {
         }
         title={<AccentTitle text={service.title} />}
         intro={service.intro}
-        art={<BrowserStackArt title={shortTitle.split(" ")[0]} />}
+        background={heroImage}
+        // The artwork sits in the right half of each image; keep it in view when cropped.
+        backgroundPosition="90% center"
+        art={heroImage ? undefined : <BrowserStackArt title={shortTitle.split(" ")[0]} />}
       >
         <ButtonLink href={`/contact?service=${service.slug}`}>Start a Project</ButtonLink>
         <ButtonLink href="/contact" variant="secondary" arrow={false}>
