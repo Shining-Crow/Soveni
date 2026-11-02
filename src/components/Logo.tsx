@@ -1,14 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
+import logo from "../../public/brand/soveni-logo.png";
 
-/** Text wordmark placeholder until the approved logo is supplied. */
 export function Logo() {
   return (
-    <Link
-      href="/"
-      className="text-xl font-semibold tracking-[0.14em] text-fg md:text-2xl"
-      aria-label="Soveni home"
-    >
-      <span className="text-gradient">S</span>OVENI
+    <Link href="/" className="inline-flex shrink-0" aria-label="Soveni home">
+      <Image src={logo} alt="Soveni" priority className="h-8 w-auto md:h-9" />
     </Link>
   );
 }
